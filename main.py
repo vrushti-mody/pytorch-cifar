@@ -21,10 +21,10 @@ parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
 parser.add_argument('--resume', '-r', action='store_true',
                     help='resume from checkpoint')
 
-parser.add_argument('--prune_one_shot', '-pos', action='store_true',
+parser.add_argument('--prune_one_shot', '-p_oneshot', action='store_true',
                     help='resume from checkpoint with one shot pruning')
 
-parser.add_argument('--prune_iterative', '-pit', action='store_true',
+parser.add_argument('--prune_iterative', '-p_iter', action='store_true',
                     help='resume from checkpoint with iterative pruning')
 
 parser.add_argument('--prune_amount', '-pr', action='store_true',
@@ -216,13 +216,13 @@ def test(epoch):
 
 
 if __name__ == '__main__':
-    num_epoch_train, num_epoch_one_shot, num_epoch_iterative = (200, 100, 25)
+    num_epoch_train, num_epoch_one_shot, num_epoch_iterative = (200, 100, 20)
     # num_epoch_train, num_epoch_one_shot, num_epoch_iterative = (4, 4, 4)
     # Iterative pruning
     if args.prune_iterative:
         total_prune_amount = args.pa
 
-        num_pruning_iter = 4
+        num_pruning_iter = 5
         # increase the pruning amount over num_pruning_iter iterations
         for prune_x in range(num_pruning_iter):
             prune_amount = (prune_x + 1) * total_prune_amount / num_pruning_iter
